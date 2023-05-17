@@ -9,7 +9,7 @@ const Footer = () => {
                     <div className="w-full md:w-1/4 mb-4">
                         <a href="#">
                             <img src={logo} alt="Website Logo" className="h-10 inline-block" />
-                            <h3 className='text-2xl font-bold mt-4 '> <span className='text-transparent  bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600'>Baby Bear Toy</span> <br /> Shopping Center </h3>
+                            <h3 className='text-2xl font-bold mt-4 '> <span className='text-gradient'>Baby Bear Toy</span> <br /> Shopping Center </h3>
                         </a>
                        
                     </div>
@@ -39,7 +39,7 @@ const Footer = () => {
                         <p>Stay up to date with our latest toys collection and offers.</p>
                         <form className="mt-2">
                             <input type="email" placeholder="Enter your email" className="w-full bg-gray-700 text-gray-300 px-4 py-2 rounded-lg"/>
-                                <button type="submit" className="mt-2 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg">Subscribe</button>
+                                <button type="submit" className="mt-2 button">Subscribe</button>
                         </form>
                     </div>
                 </div>
