@@ -11,7 +11,8 @@ const NavBar = () => {
     const menuItems = <>
         <li className="font-semibold"><ActiveLink to="/"> Home </ActiveLink></li>
         <li className="font-semibold"><ActiveLink to="/allToys"> All Toys </ActiveLink></li>
-        <li className="font-semibold"><ActiveLink to="/addToys"> Add Toys </ActiveLink></li>
+        {user && <li className="font-semibold"><ActiveLink to="/addToys"> Add Toys </ActiveLink></li>}
+        {user && <li className="font-semibold"><ActiveLink to="/myToys"> My Toys </ActiveLink></li>}
         <li className="font-semibold"><ActiveLink to="/blog"> Blog </ActiveLink></li>
         <li className="font-semibold"><ActiveLink to="/register"> Sign UP </ActiveLink></li>
 
@@ -19,8 +20,8 @@ const NavBar = () => {
 
     const handleLogOut = () => {
         logOutUser()
-        .then()
-        .catch(error => console.log(error))
+            .then()
+            .catch(error => console.log(error))
     }
     return (
         <div className="navbar bg-base-100 h-28 mb-4">
@@ -50,12 +51,14 @@ const NavBar = () => {
                                 Log Out
                             </span>
                         </button>
-                        { user?.photoURL ? <img title={user?.displayName} className='h-10 w-10 md:h-12 md:w-12 rounded-full' src={user?.photoURL} alt="" /> :
-                        <FaUserCircle className='h-10 w-10 md:h-12 md:w-12 rounded-full text-purple-700'></FaUserCircle>
-                        
-                    }
+                        {user?.photoURL ? <img title={user?.displayName} className='h-10 w-10 md:h-12 md:w-12 rounded-full' src={user?.photoURL} alt="" /> :
+                            <FaUserCircle className='h-10 w-10 md:h-12 md:w-12 rounded-full text-purple-700'></FaUserCircle>
+
+                        }
                     </div> :
-                    <button className='button'>Login</button>
+                    <Link to= '/login'>
+                        <button className='button'>Login</button>
+                    </Link>
                 }
             </div>
         </div>
