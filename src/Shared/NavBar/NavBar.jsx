@@ -1,16 +1,25 @@
 import { Link } from 'react-router-dom';
 import logo from '../../../src/assets/imges/Logo/logo.png'
 import ActiveLink from "../../Componets/ActiveLink/ActiveLink";
+import { useContext } from 'react';
+import { AuthContext } from '../../Componets/Providers/AuthProvider';
 
 
 const NavBar = () => {
+    const { user, logOutUser } = useContext(AuthContext);
     const menuItems = <>
         <li className="font-semibold"><ActiveLink to="/"> Home </ActiveLink></li>
         <li className="font-semibold"><ActiveLink to="/allToys"> All Toys </ActiveLink></li>
         <li className="font-semibold"><ActiveLink to="/blog"> Blog </ActiveLink></li>
-        <li className="font-semibold"><ActiveLink to="/login"> Login </ActiveLink></li>
+        <li className="font-semibold"><ActiveLink to="/register"> Sign UP </ActiveLink></li>
 
     </>
+
+    const handleLogOut = () => {
+        logOutUser()
+        .then()
+        .catch(error => console.log(error))
+    }
     return (
         <div className="navbar bg-base-100 h-28 mb-4">
             <div className="navbar-start">
@@ -23,7 +32,7 @@ const NavBar = () => {
                     </ul>
                 </div>
                 <Link to='/' className="">
-                    <img  src={logo} alt="" />
+                    <img src={logo} alt="" />
                 </Link>
             </div>
             <div className="navbar-center hidden lg:flex">
@@ -32,7 +41,17 @@ const NavBar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <h3>User Profile</h3>
+                {user ?
+                    <div className='flex'>
+                        <button onClick={handleLogOut} className="relative inline-flex  p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500 hover:text-white dark:text-white ">
+                            <span className="relative px-4 py-2 md:px-5 md:py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                                Log Out
+                            </span>
+                        </button>
+                        <img title={user?.displayName} className='h-10 w-10 md:h-12 md:w-12 rounded-full' src={user?.photoURL} alt="" />
+                    </div> :
+                    <button className='button'>Login</button>
+                }
             </div>
         </div>
     );

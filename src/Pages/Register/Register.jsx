@@ -1,35 +1,48 @@
 import { Link } from "react-router-dom";
 import SocialLogin from "../Login/SocialLogin/SocialLogin";
 import img from '../../assets/imges/Login/images.jpg'
+import { useContext, useState } from "react";
+import { AuthContext } from "../../Componets/Providers/AuthProvider";
+import Swal from "sweetalert2";
 
 
 const Register = () => {
+    const {createUser} = useContext(AuthContext);
+    const [error, setError] = useState('');
 
     const handleSignUP = event => {
         event.preventDefault();
         const form = event.target;
-        const name = form.name.value;
+        // const name = form.name.value;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(name, password, email)
 
-        // createUser(email, password)
-        //     .then(() => {
-        //         // const user = result.user;
-        //         Swal.fire({
-        //             position: 'top-end',
-        //             icon: 'success',
-        //             title: 'successfully Sign Up',
-        //             showConfirmButton: false,
-        //             timer: 1800
-        //         })
-        //         form.reset()
-        //     })
-        //     .catch(error => {
-        //         console.log(error.message)
-        //     })
+        if(password.length < 8) {
+            setError('Password must be 6 character long.');
+            return;
+        }
 
+        createUser(email, password)
+            .then((result) => {
+                const user = result.user;
+                console.log(user)
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'successfully Sign Up',
+                    showConfirmButton: false,
+                    timer: 1800
+                })
+                setError('')
+                form.reset()
+            })
+            .catch(error => {
+                console.log(error.message)
+            })
     }
+
+
+
     return (
         <div className="hero min-h-screen my-10">
             <div className="hero-content flex-col lg:flex-row">
@@ -60,12 +73,15 @@ const Register = () => {
                                 <label className="label">
                                     <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                                 </label>
+                                <label className="label">
+                                    <p className="label-text-alt text-red-600">{error}</p>
+                                </label>
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Photo URL</span>
                                 </label>
-                                <input type="text" name='photo' placeholder="Photo URL" className="input input-bordered" required />
+                                <input type="text" name='photo' placeholder="Photo URL" className="input input-bordered"  />
                             </div>
                             <div className="form-control mt-6">
                                 <input type="submit" className='button cursor-pointer' value="Sign Up" />
