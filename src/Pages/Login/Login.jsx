@@ -1,13 +1,16 @@
-// import Swal from 'sweetalert2';
+import Swal from 'sweetalert2';
 import { useContext, useState } from 'react';
 import logo from '../../assets/imges/Login/images.jpg'
 import SocialLogin from './SocialLogin/SocialLogin';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Componets/Providers/AuthProvider';
-import Swal from 'sweetalert2';
 
 
 const Login = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
+
     const {signInUser} = useContext(AuthContext);
     const [emailError, setEmailError] = useState('');
     const [error, setError] = useState('');
@@ -25,7 +28,7 @@ const Login = () => {
                 const user = result.user;
                 console.log(user)
 
-                // navigate(from, { replace: true })
+                navigate(from, { replace: true })
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',

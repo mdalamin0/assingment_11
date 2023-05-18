@@ -1,15 +1,20 @@
 import { useContext } from "react";
 import { AuthContext } from "../../../Componets/Providers/AuthProvider";
 import Swal from "sweetalert2";
+import { useLocation, useNavigate } from "react-router-dom";
 
 
 const SocialLogin = () => {
     const { createUserWithGoogle } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
 
     const handleLoginWithGoogle = () => {
         createUserWithGoogle()
             .then(result => {
                 console.log(result.user)
+                navigate(from, { replace: true })
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',

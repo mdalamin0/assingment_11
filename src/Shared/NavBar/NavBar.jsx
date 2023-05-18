@@ -11,6 +11,7 @@ const NavBar = () => {
     const menuItems = <>
         <li className="font-semibold"><ActiveLink to="/"> Home </ActiveLink></li>
         <li className="font-semibold"><ActiveLink to="/allToys"> All Toys </ActiveLink></li>
+        <li className="font-semibold"><ActiveLink to="/addToys"> Add Toys </ActiveLink></li>
         <li className="font-semibold"><ActiveLink to="/blog"> Blog </ActiveLink></li>
         <li className="font-semibold"><ActiveLink to="/register"> Sign UP </ActiveLink></li>
 
