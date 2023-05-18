@@ -1,14 +1,8 @@
-import { useLoaderData } from "react-router-dom";
+
 
 
 const AllToys = () => {
-    const toys = useLoaderData();
-
-    return (
-        <div>
-            <h3>This is all toys {toys.length}</h3>
-        </div>
-    );
+    <h3>This is AllToys page</h3>
 };
 
 export default AllToys;
