@@ -2,7 +2,7 @@
 import { useContext, useState } from 'react';
 import logo from '../../assets/imges/Login/images.jpg'
 import SocialLogin from './SocialLogin/SocialLogin';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Componets/Providers/AuthProvider';
 import Swal from 'sweetalert2';
 
@@ -11,7 +11,7 @@ const Login = () => {
     const {signInUser} = useContext(AuthContext);
     const [emailError, setEmailError] = useState('');
     const [error, setError] = useState('');
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const handleLogin = event => {
         event.preventDefault();
