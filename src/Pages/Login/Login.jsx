@@ -1,10 +1,17 @@
 // import Swal from 'sweetalert2';
+import { useContext, useState } from 'react';
 import logo from '../../assets/imges/Login/images.jpg'
 import SocialLogin from './SocialLogin/SocialLogin';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../Componets/Providers/AuthProvider';
+import Swal from 'sweetalert2';
 
 
 const Login = () => {
+    const {signInUser} = useContext(AuthContext);
+    const [emailError, setEmailError] = useState('');
+    const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     const handleLogin = event => {
         event.preventDefault();
@@ -12,25 +19,38 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
         console.log(password, email)
-        // signIn(email, password)
-        //     .then(result => {
-        //         const user = result.user;
-        //         console.log(user)
 
-        //         navigate(from, { replace: true })
-        //         Swal.fire({
-        //             position: 'top-end',
-        //             icon: 'success',
-        //             title: 'successfully Login',
-        //             showConfirmButton: false,
-        //             timer: 1800
-        //         })
+        signInUser(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user)
 
-        //         form.reset()
-        //     })
-        //     .catch(error => {
-        //         console.log(error)
-        //     })
+                // navigate(from, { replace: true })
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'successfully Login',
+                    showConfirmButton: false,
+                    timer: 1800
+                })
+                setError('');
+                setEmailError('')
+                form.reset()
+            })
+            .catch(error => {
+                console.log(error.message)
+                if(error.message === 'Firebase: Error (auth/user-not-found).'){
+                    setEmailError('user not fond!')
+                    setError('');
+                    return;
+                }
+                if(error.message === 'Firebase: Error (auth/wrong-password).'){
+                    setEmailError('')
+                    setError('Your Password Wrong')
+                    return
+                }
+            
+            })
 
     }
     return (
@@ -48,6 +68,9 @@ const Login = () => {
                                     <span className="label-text">Email</span>
                                 </label>
                                 <input type="email" name='email' placeholder="email" className="input input-bordered" />
+                                <label className="label">
+                                    <p className="label-text-alt text-red-600">{emailError}</p>
+                                </label>
                             </div>
                             <div className="form-control">
                                 <label className="label">
@@ -56,6 +79,9 @@ const Login = () => {
                                 <input type="password" name='password' placeholder="password" className="input input-bordered" />
                                 <label className="label">
                                     <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+                                </label>
+                                <label className="label">
+                                    <p className="label-text-alt text-red-600">{error}</p>
                                 </label>
                             </div>
                             <div className="form-control mt-6">

@@ -3,6 +3,7 @@ import logo from '../../../src/assets/imges/Logo/logo.png'
 import ActiveLink from "../../Componets/ActiveLink/ActiveLink";
 import { useContext } from 'react';
 import { AuthContext } from '../../Componets/Providers/AuthProvider';
+import { FaUserCircle } from "react-icons/fa";
 
 
 const NavBar = () => {
@@ -48,7 +49,10 @@ const NavBar = () => {
                                 Log Out
                             </span>
                         </button>
-                        <img title={user?.displayName} className='h-10 w-10 md:h-12 md:w-12 rounded-full' src={user?.photoURL} alt="" />
+                        { user?.photoURL ? <img title={user?.displayName} className='h-10 w-10 md:h-12 md:w-12 rounded-full' src={user?.photoURL} alt="" /> :
+                        <FaUserCircle className='h-10 w-10 md:h-12 md:w-12 rounded-full text-purple-700'></FaUserCircle>
+                        
+                    }
                     </div> :
                     <button className='button'>Login</button>
                 }
