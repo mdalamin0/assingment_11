@@ -44,7 +44,7 @@ const AddToys = () => {
         // form.reset()
     }
     return (
-        <div className="rounded-md bg-base-200 my-[100px]">
+        <div className="rounded-md bg-base-200 my-16">
             <div className="card-body md:w-3/4 py-[95px] mx-auto">
                 <form onSubmit={handleAddToy}>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -77,7 +77,7 @@ const AddToys = () => {
                         <textarea className="p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-300"  placeholder="Detail Description" name="detail" id="" cols="30" rows="10"></textarea>
                     </div>
                     <div className="form-control mt-6">
-                        <input className="button" type="submit" value="Add Toy" />
+                        <input className="button cursor-pointer" type="submit" value="Add Toy" />
                     </div>
                 </form>
             </div>

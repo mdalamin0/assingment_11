@@ -1,13 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import logo from '../../../src/assets/imges/Logo/logo.png'
+import ActiveLink from "../../Componets/ActiveLink/ActiveLink";
 
 
 const NavBar = () => {
     const menuItems = <>
-        <li className="font-semibold"><Link to="/"> Home </Link></li>
-        <li className="font-semibold"><Link to="/allToys"> All Toys </Link></li>
-        <li className="font-semibold"><Link to="/blog"> Blog </Link></li>
-        <li className="font-semibold"><Link to="/login"> Login </Link></li>
+        <li className="font-semibold"><ActiveLink to="/"> Home </ActiveLink></li>
+        <li className="font-semibold"><ActiveLink to="/allToys"> All Toys </ActiveLink></li>
+        <li className="font-semibold"><ActiveLink to="/blog"> Blog </ActiveLink></li>
+        <li className="font-semibold"><ActiveLink to="/login"> Login </ActiveLink></li>
 
     </>
     return (
