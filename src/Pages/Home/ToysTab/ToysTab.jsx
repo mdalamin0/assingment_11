@@ -2,7 +2,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import './ToysTab.css'
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const ToysTab = () => {
     const [defaultCategory, setDefaultCategory] = useState([])
@@ -31,6 +31,17 @@ const ToysTab = () => {
             .then(data => setCategoryToys(data))
     }
 
+    const handleDetails = id => {
+        Swal.fire({
+            title: 'Sweet!',
+            text: 'Modal with a custom image.',
+            imageUrl: 'https://unsplash.it/400/200',
+            imageWidth: 400,
+            imageHeight: 200,
+            imageAlt: 'Custom image',
+        })
+    }
+
 
     return (
         <>
@@ -56,7 +67,7 @@ const ToysTab = () => {
                                         <div className="card-actions justify-between items-center pt-5">
                                             <div className="">Rating: {toy.rating}</div>
                                             <div className="">
-                                                <button className='button'>View Details</button>
+                                                <button onClick={() => handleDetails(toy._id)} className='button'>View Details</button>
                                             </div>
                                         </div>
                                     </div>
@@ -80,7 +91,7 @@ const ToysTab = () => {
                                         <div className="card-actions pt-8 justify-between items-center">
                                             <div className="">Rating: {toy.rating}</div>
                                             <div className="">
-                                                <button className='button'>View Details</button>
+                                                <button onClick={() => handleDetails(toy._id)} className='button'>View Details</button>
                                             </div>
                                         </div>
                                     </div>
@@ -104,7 +115,7 @@ const ToysTab = () => {
                                         <div className="card-actions pt-8 justify-between items-center">
                                             <div className="">Rating: {toy.rating}</div>
                                             <div className="">
-                                                <button className='button'>View Details</button>
+                                                <button onClick={() => handleDetails(toy._id)} className='button'>View Details</button>
                                             </div>
                                         </div>
                                     </div>
