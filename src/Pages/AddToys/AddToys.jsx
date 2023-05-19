@@ -19,7 +19,6 @@ const AddToys = () => {
         const email = user?.email;
 
         const newToy = {name, email, sellerName, pictureUrl, rating, price, category, quantity, detail}
-        console.log(newToy)
 
         // send data to the server
 

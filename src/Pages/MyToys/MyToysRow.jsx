@@ -4,15 +4,15 @@ import { Link } from "react-router-dom";
 const MyToysRow = ({ toy }) => {
     const {  _id, pictureUrl, rating, price } = toy;
 
-    const handleDelete = () => {
-        console.log('delete')
-    }
+    // const handleDelete = () => {
+    //     console.log('delete')
+    // }
    
     return (
         <tr>
             <th>
                 <label className="text-3xl cursor-pointer">
-                    <HiXCircle onClick={() => handleDelete(_id)}></HiXCircle>
+                    {/* <HiXCircle onClick={() => handleDelete(_id)}></HiXCircle> */}
                 </label>
             </th>
             <td>
@@ -31,7 +31,7 @@ const MyToysRow = ({ toy }) => {
                 {rating}
             </td>
             <th>
-                <Link to={`update/${_id}`}>
+                <Link to={`../updateToys/${_id}`}>
                     <button className="button">Update</button>
                 </Link>
             </th>
