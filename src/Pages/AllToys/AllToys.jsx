@@ -1,8 +1,20 @@
-
+import { useEffect, useState } from "react";
 
 
 const AllToys = () => {
-    <h3>This is AllToys page</h3>
+    // const [toys, setToys] = useState([]);
+
+    // useEffect(() => {
+    //     fetch('http://localhost:5000/toys')
+    //         .then(res => res.json())
+    //         .then(data => setToys(data.slice(0, 20)));
+    // }, [])
+
+    return (
+        <div>
+            
+        </div>
+    );
 };
 
 export default AllToys;

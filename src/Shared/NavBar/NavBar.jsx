@@ -8,7 +8,7 @@ import { FaUserCircle } from "react-icons/fa";
 
 const NavBar = () => {
     const { user, logOutUser } = useContext(AuthContext);
-    console.log(user.email)
+    // console.log(user.email)
     const menuItems = <>
         <li className="font-semibold"><ActiveLink to="/"> Home </ActiveLink></li>
         <li className="font-semibold"><ActiveLink to="/allToys"> All Toys </ActiveLink></li>

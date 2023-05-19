@@ -1,14 +1,13 @@
-import { HiOutlineCheckCircle, HiXCircle } from "react-icons/hi";
+import {  HiXCircle } from "react-icons/hi";
+import { Link } from "react-router-dom";
 
-const MyToysRow = ({toy}) => {
-    const {name, _id, pictureUrl, rating, price} = toy;
+const MyToysRow = ({ toy }) => {
+    const {  _id, pictureUrl, rating, price } = toy;
 
-    const handleDelete =() => {
+    const handleDelete = () => {
         console.log('delete')
     }
-    const handleUpdate = (id) => {
-        console.log(id)
-    }
+   
     return (
         <tr>
             <th>
@@ -32,10 +31,9 @@ const MyToysRow = ({toy}) => {
                 {rating}
             </td>
             <th>
-                {
-                    status === 'confirm' ? <div className="flex items-center"><span className="font-bold text-green-700">Confirmed</span> <HiOutlineCheckCircle className="text-2xl text-green-700 ms-2"></HiOutlineCheckCircle> </div> :
-                        <button onClick={() => handleUpdate(_id)} className="button ">Update</button>
-                }
+                <Link to={`update/${_id}`}>
+                    <button className="button">Update</button>
+                </Link>
             </th>
         </tr>
     );
