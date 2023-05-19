@@ -41,7 +41,7 @@ const AddToys = () => {
                     })
                 }
             })
-        // form.reset()
+        form.reset()
     }
     return (
         <div className="rounded-md bg-base-200 my-16">
@@ -49,7 +49,7 @@ const AddToys = () => {
                 <form onSubmit={handleAddToy}>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="form-control">
-                            <input type="text" name="name" placeholder="Name" className="input" defaultValue={user?.displayName} />
+                            <input type="text" name="name" placeholder="Name" className="input"  />
                         </div>
                         <div className="form-control">
                             <input type="text" name="sellerName" placeholder="Seller Name" className="input" />

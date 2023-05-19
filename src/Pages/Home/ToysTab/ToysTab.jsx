@@ -1,14 +1,17 @@
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import './ToysTab.css'
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../Componets/Providers/AuthProvider';
 import Swal from 'sweetalert2';
 
 const ToysTab = () => {
-    const [defaultCategory, setDefaultCategory] = useState([])
-   
+    const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
 
-    const [categoryToys, setCategoryToys] = useState(defaultCategory)
+
+    const [categoryToys, setCategoryToys] = useState([])
 
     const handleTeddyCategory = category => {
         fetch(`http://localhost:5000/toys/${category}`)
@@ -32,6 +35,20 @@ const ToysTab = () => {
             .then(data => setCategoryToys(data))
     }
 
+    const handleToast = (id) => {
+        if (!user) {
+            Swal.fire({
+                title: 'You have to log in first to view details',
+                showCancelButton: true,
+                confirmButtonText: 'Ok'
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    navigate(`/detailsToys/${id}`)
+                }
+            })
+        }
+    }
 
 
     return (
@@ -54,12 +71,21 @@ const ToysTab = () => {
                                         <img src={toy.pictureUrl} alt="" className="rounded-md h-72 w-full" />
                                     </figure>
                                     <div className="card-body">
-                                        <h2 className="card-title"> {toy.name}  </h2>
-                                        <p className='text-left'>Price: {toy.price}</p>
+                                        <h2 className="card-title font-bold text-xl"> {toy.name}  </h2>
+                                        <p className='text-left text-semibold text-slate-400'>Price: {toy.price}</p>
+                                        <p className='text-left text-semibold text-slate-400'>Rating: {toy.rating}</p>
                                         <div className="card-actions justify-between items-center pt-5">
-                                            <div className="">Rating: {toy.rating}</div>
+                                            <div className=""><p>Rating: {toy.rating}</p></div>
                                             <div className="">
-                                                <button  className='button'>View Details</button>
+                                                {user ?
+                                                    <Link to={`/detailsToys/${toy._id}`}>
+                                                        <button className='button'>View Details</button>
+                                                    </Link>
+                                                    : <Link onClick={() => handleToast(toy._id)}>
+                                                        <button className='button'>View Details</button>
+                                                    </Link>
+
+                                                }
                                             </div>
                                         </div>
                                     </div>
@@ -83,7 +109,15 @@ const ToysTab = () => {
                                         <div className="card-actions pt-8 justify-between items-center">
                                             <div className="">Rating: {toy.rating}</div>
                                             <div className="">
-                                                <button onClick={() => handleDetails(toy._id)} className='button'>View Details</button>
+                                            {user ?
+                                                    <Link to={`/detailsToys/${toy._id}`}>
+                                                        <button className='button'>View Details</button>
+                                                    </Link>
+                                                    : <Link onClick={() => handleToast(toy._id)}>
+                                                        <button className='button'>View Details</button>
+                                                    </Link>
+
+                                                }
                                             </div>
                                         </div>
                                     </div>
@@ -107,7 +141,15 @@ const ToysTab = () => {
                                         <div className="card-actions pt-8 justify-between items-center">
                                             <div className="">Rating: {toy.rating}</div>
                                             <div className="">
-                                                <button onClick={() => handleDetails(toy._id)} className='button'>View Details</button>
+                                            {user ?
+                                                    <Link to={`/detailsToys/${toy._id}`}>
+                                                        <button className='button'>View Details</button>
+                                                    </Link>
+                                                    : <Link onClick={() => handleToast(toy._id)}>
+                                                        <button className='button'>View Details</button>
+                                                    </Link>
+
+                                                }
                                             </div>
                                         </div>
                                     </div>
