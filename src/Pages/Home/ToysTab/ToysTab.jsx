@@ -6,11 +6,7 @@ import Swal from 'sweetalert2';
 
 const ToysTab = () => {
     const [defaultCategory, setDefaultCategory] = useState([])
-    useEffect(() => {
-        fetch(`http://localhost:5000/toys/Teddy Bear`)
-            .then(res => res.json())
-            .then(data => setDefaultCategory(data))
-    }, [])
+   
 
     const [categoryToys, setCategoryToys] = useState(defaultCategory)
 
@@ -19,6 +15,11 @@ const ToysTab = () => {
             .then(res => res.json())
             .then(data => setCategoryToys(data))
     }
+    useEffect(() => {
+        fetch(`http://localhost:5000/toys/Teddy Bear`)
+            .then(res => res.json())
+            .then(data => setCategoryToys(data))
+    }, [])
 
     const handleDogCategory = category => {
         fetch(`http://localhost:5000/toys/${category}`)
@@ -31,24 +32,15 @@ const ToysTab = () => {
             .then(data => setCategoryToys(data))
     }
 
-    const handleDetails = id => {
-        Swal.fire({
-            title: 'Sweet!',
-            text: 'Modal with a custom image.',
-            imageUrl: 'https://unsplash.it/400/200',
-            imageWidth: 400,
-            imageHeight: 200,
-            imageAlt: 'Custom image',
-        })
-    }
 
 
     return (
         <>
-            <h3 className='text-2xl text-center font-bold mt-20 mb-8'>Shop by Our Category</h3>
+            <h3 className='text-2xl text-center font-bold mt-20 '>Shop by Our Category</h3>
+            <p className='text-semibold text-slate-400 text-center w-2/3 mx-auto mb-8 mt-3'>Fun and educational playthings for kids and adults alike. Spark imagination, teach about animals, and provide sensory stimulation.  From plushies to figurines, they bring joy and learning to all ages.</p>
             <Tabs className='text-center'>
                 <TabList className='border-0 font-semibold text-xl bg-slate-300 py-5 '>
-                    <Tab onClick={() => handleTeddyCategory('Dog')}>Teddy</Tab>
+                    <Tab onClick={() => handleTeddyCategory('Teddy Bear')}>Teddy</Tab>
                     <Tab onClick={() => handleDogCategory('Dog')}>Dog</Tab>
                     <Tab onClick={() => handleHorseCategory('Horse')}>Horse</Tab>
                 </TabList>
@@ -67,7 +59,7 @@ const ToysTab = () => {
                                         <div className="card-actions justify-between items-center pt-5">
                                             <div className="">Rating: {toy.rating}</div>
                                             <div className="">
-                                                <button onClick={() => handleDetails(toy._id)} className='button'>View Details</button>
+                                                <button  className='button'>View Details</button>
                                             </div>
                                         </div>
                                     </div>
