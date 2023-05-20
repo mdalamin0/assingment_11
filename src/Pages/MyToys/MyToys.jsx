@@ -28,8 +28,7 @@ const MyToys = () => {
 
     return (
         <div className="overflow-x-auto w-full my-12">
-            <div className='flex place-content-end relative mb-24'>
-
+            <div className='flex place-content-end relative mb-6'>
                 <button onClick={() => setDropdown(!dropdown)} className='bg-gray-200 font-semibold py-3 px-5 rounded-md flex items-center'>Short by Price{dropdown ? <FaAngleUp title='close menu' className='h-4 w-4 ms-2'></FaAngleUp> : <FaAngleDown title='Open menu' className='h-4 w-4 ms-2'></FaAngleDown>}</button>
                 <div className={`${dropdown ? 'absolute top-8 right-10 ' : 'hidden'}`}>
                     <div className='flex my-4 shadow-xl bg-slate-50  rounded-md p-6'>
@@ -46,6 +45,7 @@ const MyToys = () => {
                     </div>
                 </div>
             </div>
+            <h3 className="text-center font-bold text-2xl mb-8">Your all added Toys:</h3>
             <table className="table w-full">
                 {/* head */}
                 <thead>

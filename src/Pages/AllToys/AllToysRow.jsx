@@ -1,9 +1,27 @@
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../Componets/Providers/AuthProvider";
+import Swal from "sweetalert2";
 
 
 const AllToysRow = ({ toy, index }) => {
+    const { user } = useContext(AuthContext);
     const { _id, pictureUrl, rating, price, name, category, sellerName, quantity } = toy;
-
+    const navigate = useNavigate();
+    const handleToast = (id) => {
+        if (!user) {
+            Swal.fire({
+                title: 'You have to log in first to view details',
+                showCancelButton: true,
+                confirmButtonText: 'Ok'
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    navigate(`/detailsToys/${id}`)
+                }
+            })
+        }
+    }
     return (
         <tr>
             <th>
@@ -35,9 +53,15 @@ const AllToysRow = ({ toy, index }) => {
                 {quantity}
             </td>
             <th>
-                <Link >
-                    <button className="button">View Details</button>
-                </Link>
+                {user ?
+                    <Link to={`/detailsToys/${_id}`}>
+                        <button className='button'>View Details</button>
+                    </Link>
+                    : <Link onClick={() => handleToast(_id)}>
+                        <button className='button'>View Details</button>
+                    </Link>
+
+                }
             </th>
         </tr>
     );

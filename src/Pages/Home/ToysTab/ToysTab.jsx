@@ -7,7 +7,8 @@ import { AuthContext } from '../../../Componets/Providers/AuthProvider';
 import Swal from 'sweetalert2';
 import Aos from 'aos';
 import 'aos/dist/aos.css'
-
+import { Rating } from '@smastrom/react-rating'
+import '@smastrom/react-rating/style.css'
 
 const ToysTab = () => {
     const { user } = useContext(AuthContext);
@@ -16,8 +17,8 @@ const ToysTab = () => {
 
     Aos.init({
         duration: 1200,
-      })
-      
+    })
+
 
 
     const handleTeddyCategory = category => {
@@ -61,7 +62,7 @@ const ToysTab = () => {
     return (
         <>
             <h3 className='text-2xl text-center font-bold mt-20 '>Shop by Our Category</h3>
-            <p className='text-semibold text-slate-400 text-center w-2/3 mx-auto mb-8 mt-3'>Fun and educational playthings for kids and adults alike. Spark imagination, teach about animals, and provide sensory stimulation.  From plushies to figurines, they bring joy and learning to all ages.</p>
+            <p className='text-semibold text-slate-400 text-center md:w-2/3 mx-auto mb-8 mt-3'>Fun and educational playthings for kids and adults alike. Spark imagination, teach about animals, and provide sensory stimulation.  From plushies to figurines, they bring joy and learning to all ages.</p>
             <Tabs className='text-center'>
                 <TabList className='border-0 font-semibold text-xl bg-slate-300 py-5 '>
                     <Tab onClick={() => handleTeddyCategory('Teddy Bear')}>Teddy</Tab>
@@ -70,7 +71,7 @@ const ToysTab = () => {
                 </TabList>
 
                 <TabPanel >
-                    <div  className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-10'>
+                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-10'>
                         {
                             categoryToys.map(toy => <div key={toy._id}>
                                 <div data-aos="fade-left" className="border-2 rounded-md ">
@@ -79,10 +80,16 @@ const ToysTab = () => {
                                     </figure>
                                     <div className="card-body">
                                         <h2 className="card-title font-bold text-xl"> {toy.name}  </h2>
-                                        <p className='text-left text-semibold text-slate-400'>Price: {toy.price}</p>
+                                        <p className='text-left text-semibold text-slate-400'>Price: $ {toy.price}</p>
                                         <p className='text-left text-semibold text-slate-400'>Rating: {toy.rating}</p>
                                         <div className="card-actions justify-between items-center pt-5">
-                                            <div className=""><p>Rating: {toy.rating}</p></div>
+                                            <div className="">
+                                                <Rating
+                                                    style={{ maxWidth: 150 }}
+                                                    value={Math.round(toy.rating || 0)}
+                                                    readOnly
+                                                />
+                                            </div>
                                             <div className="">
                                                 {user ?
                                                     <Link to={`/detailsToys/${toy._id}`}>
@@ -112,11 +119,15 @@ const ToysTab = () => {
                                     </figure>
                                     <div className="card-body">
                                         <h2 className="card-title"> {toy.name}  </h2>
-                                        <p className='text-left'>Price: {toy.price}</p>
+                                        <p className='text-left'>Price: $ {toy.price}</p>
                                         <div className="card-actions pt-8 justify-between items-center">
-                                            <div className="">Rating: {toy.rating}</div>
+                                            <div className=""> <Rating
+                                                    style={{ maxWidth: 150 }}
+                                                    value={Math.round(toy.rating || 0)}
+                                                    readOnly
+                                                /></div>
                                             <div className="">
-                                            {user ?
+                                                {user ?
                                                     <Link to={`/detailsToys/${toy._id}`}>
                                                         <button className='button'>View Details</button>
                                                     </Link>
@@ -144,11 +155,15 @@ const ToysTab = () => {
                                     </figure>
                                     <div className="card-body">
                                         <h2 className="card-title"> {toy.name}  </h2>
-                                        <p className='text-left'>Price: {toy.price}</p>
+                                        <p className='text-left'>Price:$ {toy.price}</p>
                                         <div className="card-actions pt-8 justify-between items-center">
-                                            <div className="">Rating: {toy.rating}</div>
+                                            <div className=""> <Rating
+                                                    style={{ maxWidth: 150 }}
+                                                    value={Math.round(toy.rating || 0)}
+                                                    readOnly
+                                                /></div>
                                             <div className="">
-                                            {user ?
+                                                {user ?
                                                     <Link to={`/detailsToys/${toy._id}`}>
                                                         <button className='button'>View Details</button>
                                                     </Link>
