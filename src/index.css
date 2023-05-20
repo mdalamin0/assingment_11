@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=EB+Garamond:wght@500;600;700;800&family=Lato:ital,wght@0,400;0,700;1,400&family=Poppins:wght@400;500;600;700&family=Rancho&display=swap');
 
 
 .text-gradient{

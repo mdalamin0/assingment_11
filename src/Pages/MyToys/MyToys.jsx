@@ -1,36 +1,56 @@
-import { useContext } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Componets/Providers/AuthProvider";
 import MyToysRow from "./MyToysRow";
+import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import { HiXCircle } from "react-icons/hi";
 
 
 const MyToys = () => {
-    const myToys = useLoaderData();
-    const {loading} = useContext(AuthContext);
+    const [toys, setToys] = useState([]);
+    const { user } = useContext(AuthContext);
+    const [dropdown, setDropdown] = useState(false)
 
-    if (loading) {
-        return <div className="text-center my-24 text-purple-700">
-            <div
-                className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
-                role="status">
-                <span
-                    className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
-                >Loading...</span>
-            </div>
-        </div>
+    useEffect(() => {
+        fetch(`http://localhost:5000/toysByEmail/${user?.email}`)
+            .then(res => res.json())
+            .then(data => {
+                setToys(data)
+            })
+    }, [user])
+
+    const handleAscendingByPrice = () => {
+       console.log('okk')
     }
+
 
     return (
         <div className="overflow-x-auto w-full my-12">
+            <div className='flex place-content-end relative mb-24'>
+
+                <button onClick={() => setDropdown(!dropdown)} className='bg-gray-200 font-semibold py-3 px-5 rounded-md flex items-center'>Short by {dropdown ? <FaAngleUp title='close menu' className='h-4 w-4 ms-2'></FaAngleUp> : <FaAngleDown title='Open menu' className='h-4 w-4 ms-2'></FaAngleDown>}</button>
+                <div className={`${dropdown ? 'absolute top-8 right-10 ' : 'hidden'}`}>
+                    <div className='flex my-4 shadow-xl bg-slate-50  rounded-md p-6'>
+                        <button onClick={handleAscendingByPrice} className="relative inline-flex  p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500 hover:text-white dark:text-white ">
+                            <span className="relative px-4 py-2 md:px-5 md:py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                                Ascending
+                            </span>
+                        </button>
+                        <button className="relative inline-flex  p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500 hover:text-white dark:text-white ">
+                            <span className="relative px-4 py-2 md:px-5 md:py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                                Descending
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
             <table className="table w-full">
                 {/* head */}
                 <thead>
                     <tr>
                         <th>
-                        <label className="text-3xl cursor-pointer">
-                    <HiXCircle></HiXCircle>
-                </label>
+                            <label className="text-3xl cursor-pointer">
+                                <HiXCircle></HiXCircle>
+                            </label>
                         </th>
                         <th>Toy Name</th>
                         <th>Job</th>
@@ -41,7 +61,12 @@ const MyToys = () => {
                 <tbody>
                     {/* row 1 */}
                     {
-                        myToys.map(toy => <MyToysRow key={toy._id} toy={toy}></MyToysRow>)
+                        toys.map(toy => <MyToysRow
+                            key={toy._id}
+                            toy={toy}
+                            toys={toys}
+                            setToys={setToys}
+                        ></MyToysRow>)
                     }
                 </tbody>
 

@@ -5,13 +5,20 @@ import { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Componets/Providers/AuthProvider';
 import Swal from 'sweetalert2';
+import Aos from 'aos';
+import 'aos/dist/aos.css'
+
 
 const ToysTab = () => {
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
+    const [categoryToys, setCategoryToys] = useState([]);
 
+    Aos.init({
+        duration: 1200,
+      })
+      
 
-    const [categoryToys, setCategoryToys] = useState([])
 
     const handleTeddyCategory = category => {
         fetch(`http://localhost:5000/toys/${category}`)
@@ -63,10 +70,10 @@ const ToysTab = () => {
                 </TabList>
 
                 <TabPanel >
-                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-10'>
+                    <div  className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-10'>
                         {
                             categoryToys.map(toy => <div key={toy._id}>
-                                <div className="border-2 rounded-md">
+                                <div data-aos="fade-left" className="border-2 rounded-md ">
                                     <figure className="card-body pt-8">
                                         <img src={toy.pictureUrl} alt="" className="rounded-md h-72 w-full" />
                                     </figure>
@@ -99,7 +106,7 @@ const ToysTab = () => {
                         {
                             categoryToys.map(toy => <div key={toy._id}>
 
-                                <div className="border-2 rounded-md">
+                                <div data-aos="slide-up" className="border-2 rounded-md">
                                     <figure className="card-body pt-5">
                                         <img src={toy.pictureUrl} alt="" className="rounded-md h-72 w-full" />
                                     </figure>
@@ -131,7 +138,7 @@ const ToysTab = () => {
                         {
                             categoryToys.map(toy => <div key={toy._id}>
 
-                                <div className="border-2 rounded-md">
+                                <div data-aos="fade-down" className="border-2 rounded-md">
                                     <figure className="card-body pt-5">
                                         <img src={toy.pictureUrl} alt="" className="rounded-md h-72  w-full" />
                                     </figure>

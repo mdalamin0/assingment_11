@@ -8,13 +8,12 @@ import { FaUserCircle } from "react-icons/fa";
 
 const NavBar = () => {
     const { user, logOutUser } = useContext(AuthContext);
-    // console.log(user.email)
     const menuItems = <>
         <li className="font-semibold"><ActiveLink to="/"> Home </ActiveLink></li>
         <li className="font-semibold"><ActiveLink to="/allToys"> All Toys </ActiveLink></li>
         {user && <li className="font-semibold"><ActiveLink to="/addToys"> Add Toys </ActiveLink></li>}
         {
-        user && <li className="font-semibold"><ActiveLink to={`myToys/${user?.email}`}> My Toys </ActiveLink></li>
+        user && <li className="font-semibold"><ActiveLink to="/myToys"> My Toys </ActiveLink></li>
         }
         <li className="font-semibold"><ActiveLink to="/blog"> Blogs </ActiveLink></li>
         <li className="font-semibold"><ActiveLink to="/register"> Sign UP </ActiveLink></li>

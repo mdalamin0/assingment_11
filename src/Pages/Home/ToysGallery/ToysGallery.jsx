@@ -1,9 +1,16 @@
 import { useEffect, useState } from "react";
+import Aos from 'aos';
+import 'aos/dist/aos.css'
 
 
 
 const ToysGallery = () => {
     const [toys, setToys] = useState([]);
+
+    Aos.init({
+        duration: 1200,
+      })
+      
 
     useEffect(() => {
         fetch('http://localhost:5000/toys')
@@ -20,7 +27,7 @@ const ToysGallery = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 my-10 ">
                 {
                     toys.map(toy =>
-                        <div className="shadow-md rounded-md" key={toy._id}>
+                        <div data-aos="zoom-out" className="shadow-md rounded-md" key={toy._id}>
                             <img className="h-72 rounded-md w-full" src={toy.pictureUrl} alt="" />
 
                         </div>
