@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const MyToysRow = ({ toy, toys, setToys }) => {
-    const { _id, pictureUrl, rating, price } = toy;
+    const { _id, pictureUrl, rating, price, name, sellerName , quantity} = toy;
 
     const handleDelete = _id => {
         Swal.fire({
@@ -16,7 +16,7 @@ const MyToysRow = ({ toy, toys, setToys }) => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/toysById/${_id}`, {
+                fetch(`https://toy-marketplace-server-pearl.vercel.app/toysById/${_id}`, {
                     method: 'DELETE'
                 })
                     .then(res => res.json())
@@ -51,10 +51,17 @@ const MyToysRow = ({ toy, toys, setToys }) => {
                             <img src={pictureUrl} alt="Avatar Tailwind CSS Component" />
                         </div>
                     </div>
+                    <div>
+                        <div className="font-bold"> Name: {name}</div>
+                        <div className="text-sm opacity-50">Seller: {sellerName}</div>
+                    </div>
                 </div>
             </td>
             <td className="font-semibold text-slate-600">
                 ${price}
+            </td>
+            <td className="font-semibold text-slate-600">
+                {quantity}
             </td>
             <td className="font-semibold text-slate-600">
                 {rating}

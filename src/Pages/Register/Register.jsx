@@ -4,11 +4,14 @@ import img from '../../assets/imges/Login/images.jpg'
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Componets/Providers/AuthProvider";
 import Swal from "sweetalert2";
+import useTitle from "../../Componets/useTitle/useTitle";
 
 
 const Register = () => {
     const {createUser} = useContext(AuthContext);
     const [error, setError] = useState('');
+
+    useTitle('Register')
 
     const handleSignUP = event => {
         event.preventDefault();

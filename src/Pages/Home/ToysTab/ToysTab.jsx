@@ -21,23 +21,23 @@ const ToysTab = () => {
 
 
     const handleTeddyCategory = category => {
-        fetch(`http://localhost:5000/toys/${category}`)
+        fetch(`https://toy-marketplace-server-pearl.vercel.app/toys/${category}`)
             .then(res => res.json())
             .then(data => setCategoryToys(data))
     }
     useEffect(() => {
-        fetch(`http://localhost:5000/toys/Teddy Bear`)
+        fetch(`https://toy-marketplace-server-pearl.vercel.app/toys/Teddy Bear`)
             .then(res => res.json())
             .then(data => setCategoryToys(data))
     }, [])
 
     const handleDogCategory = category => {
-        fetch(`http://localhost:5000/toys/${category}`)
+        fetch(`https://toy-marketplace-server-pearl.vercel.app/toys/${category}`)
             .then(res => res.json())
             .then(data => setCategoryToys(data))
     }
     const handleHorseCategory = category => {
-        fetch(`http://localhost:5000/toys/${category}`)
+        fetch(`https://toy-marketplace-server-pearl.vercel.app/toys/${category}`)
             .then(res => res.json())
             .then(data => setCategoryToys(data))
     }

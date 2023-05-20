@@ -22,7 +22,7 @@ const AddToys = () => {
 
         // send data to the server
 
-        fetch('http://localhost:5000/toys', {
+        fetch('https://toy-marketplace-server-pearl.vercel.app/toys', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -44,6 +44,8 @@ const AddToys = () => {
     }
     return (
         <div className="rounded-md bg-base-200 my-16">
+            <h3 className="text-3xl font-extrabold text-center pt-8" style={{ fontFamily: 'Ranch, cursive' }}>Add Your Toy</h3>
+            <p className="text-center mt-5 w-3/4 mx-auto">It is a long established fact that a reader will be distraceted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here.</p>
             <div className="card-body md:w-3/4 py-[95px] mx-auto">
                 <form onSubmit={handleAddToy}>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -54,7 +56,7 @@ const AddToys = () => {
                             <input type="text" name="sellerName" placeholder="Seller Name" className="input" />
                         </div>
                         <div className="form-control">
-                            <input type="email" name="email" placeholder="Seller Email" defaultValue={user?.email} className="input" />
+                            <input type="email" name="email" placeholder="Seller Email" defaultValue={user?.email} className="input" readOnly />
                         </div>
                         <div className="form-control">
                             <input type="text" name="pictureUrl" placeholder="Picture URL" className="input focus:outline-none" />

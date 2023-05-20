@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 
 const AllToysRow = ({ toy, index }) => {
-    const { _id, pictureUrl, rating, price, name, category, sellerName } = toy;
+    const { _id, pictureUrl, rating, price, name, category, sellerName, quantity } = toy;
 
     return (
         <tr>
@@ -32,7 +32,7 @@ const AllToysRow = ({ toy, index }) => {
                 {rating}
             </td>
             <td className="font-semibold text-slate-600">
-                {rating}
+                {quantity}
             </td>
             <th>
                 <Link >

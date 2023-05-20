@@ -13,7 +13,7 @@ const ToysGallery = () => {
       
 
     useEffect(() => {
-        fetch('http://localhost:5000/toys')
+        fetch('https://toy-marketplace-server-pearl.vercel.app/toys')
             .then(res => res.json())
             .then(data => setToys(data.slice(0, 20)));
     }, [])

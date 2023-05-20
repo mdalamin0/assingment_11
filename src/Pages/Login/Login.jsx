@@ -4,12 +4,14 @@ import logo from '../../assets/imges/Login/images.jpg'
 import SocialLogin from './SocialLogin/SocialLogin';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Componets/Providers/AuthProvider';
+import useTitle from '../../Componets/useTitle/useTitle';
 
 
 const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
+    useTitle('Login')
 
     const {signInUser} = useContext(AuthContext);
     const [emailError, setEmailError] = useState('');

@@ -25,7 +25,7 @@ const UpdateToys = () => {
 
         // send data to the server
 
-        fetch(`http://localhost:5000/toysById/${_id}`, {
+        fetch(`https://toy-marketplace-server-pearl.vercel.app/toysById/${_id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -46,7 +46,7 @@ const UpdateToys = () => {
     }
     return (
         <div className="rounded-md bg-base-200 my-16">
-            <h3 className="text-3xl font-extrabold text-center pt-8" style={{ fontFamily: 'Ranch, cursive' }}>Update Toy {name}</h3>
+            <h3 className="text-3xl font-extrabold text-center pt-8" style={{ fontFamily: 'Ranch, cursive' }}>Update Toy: {name}</h3>
             <p className="text-center mt-5 w-3/4 mx-auto">It is a long established fact that a reader will be distraceted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here.</p>
             <div className="card-body md:w-3/4 py-[95px] mx-auto">
                 
