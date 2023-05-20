@@ -1,12 +1,15 @@
 import { useContext, useEffect, useState } from "react";
 import AllToysRow from "./AllToysRow";
 import { AuthContext } from "../../Componets/Providers/AuthProvider";
+import useTitle from "../../Componets/useTitle/useTitle";
 
 
 const AllToys = () => {
     const [toys, setToys] = useState([]);
     const [search , setSearch] = useState('');
     const { loading } = useContext(AuthContext);
+
+    useTitle('All Toys')
 
     useEffect(() => {
         fetch('http://localhost:5000/toys')
@@ -61,13 +64,15 @@ const AllToys = () => {
                 <thead>
                     <tr>
                         <th>
-                            <label className="text-3xl cursor-pointer">
-                               #
+                            <label className="">
+                               No.
                             </label>
                         </th>
                         <th>Toy Image</th>
-                        <th>Job</th>
-                        <th>Favorite Color</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Rating</th>
+                        <th>Quantity</th>
                         <th>Details</th>
                     </tr>
                 </thead>

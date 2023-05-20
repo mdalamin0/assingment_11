@@ -3,12 +3,15 @@ import { AuthContext } from "../../Componets/Providers/AuthProvider";
 import MyToysRow from "./MyToysRow";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import { HiXCircle } from "react-icons/hi";
+import useTitle from "../../Componets/useTitle/useTitle";
 
 
 const MyToys = () => {
     const [toys, setToys] = useState([]);
     const { user } = useContext(AuthContext);
     const [dropdown, setDropdown] = useState(false)
+
+    useTitle('My Toys')
 
     useEffect(() => {
         fetch(`http://localhost:5000/toysByEmail/${user?.email}`)
