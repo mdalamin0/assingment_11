@@ -28,9 +28,7 @@ const MyToys = () => {
             .then(data => {
                 const sortToys = data.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
                 setToys(sortToys)
-                console.log(sortToys)
             })
-        // setToys(sortToys)
     }
 
     const handleDescendingByPrice = () => {

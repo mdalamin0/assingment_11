@@ -8,27 +8,30 @@ import useTitle from "../../Componets/useTitle/useTitle";
 
 
 const Register = () => {
-    const {createUser} = useContext(AuthContext);
-    const [error, setError] = useState('');
+    const {createUser, profileUpdate} = useContext(AuthContext);
+    const [passError, setPassError] = useState('');
+    const [userError, serUserError] = useState('');
 
     useTitle('Register')
 
     const handleSignUP = event => {
         event.preventDefault();
         const form = event.target;
-        // const name = form.name.value;
+        const name = form.name.value;
+        const photo = form.photo.value;
         const email = form.email.value;
         const password = form.password.value;
 
         if(password.length < 8) {
-            setError('Password must be 6 character long.');
+            setPassError('Password must be 6 character long.');
+            serUserError();
             return;
         }
 
         createUser(email, password)
             .then((result) => {
                 const user = result.user;
-                console.log(user)
+                profileUpdate(user, name, photo)
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
@@ -36,11 +39,15 @@ const Register = () => {
                     showConfirmButton: false,
                     timer: 1800
                 })
-                setError('')
+                setPassError('')
                 form.reset()
             })
             .catch(error => {
                 console.log(error.message)
+                if(error.message === 'Firebase: Error (auth/email-already-in-use).'){
+                    serUserError('Your email-already-in-use')
+                    setPassError('')
+                }
             })
     }
 
@@ -67,6 +74,10 @@ const Register = () => {
                                     <span className="label-text">Email</span>
                                 </label>
                                 <input type="email" name='email' placeholder="email" className="input input-bordered" required />
+                                <label className="label">
+                                    <p className="label-text-alt text-red-600">
+                                        {userError}</p>
+                                </label>
                             </div>
                             <div className="form-control">
                                 <label className="label">
@@ -77,7 +88,7 @@ const Register = () => {
                                     <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                                 </label>
                                 <label className="label">
-                                    <p className="label-text-alt text-red-600">{error}</p>
+                                    <p className="label-text-alt text-red-600">{passError}</p>
                                 </label>
                             </div>
                             <div className="form-control">

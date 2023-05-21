@@ -8,7 +8,7 @@ const MyToysRow = ({ toy, toys, setToys }) => {
     const handleDelete = _id => {
         Swal.fire({
             title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            text: "You want ot delete this!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -25,7 +25,7 @@ const MyToysRow = ({ toy, toys, setToys }) => {
                         if (data.deletedCount > 0) {
                             Swal.fire(
                                 'Deleted!',
-                                'Your coffee has been deleted.',
+                                'Your item has been deleted.',
                                 'success'
                             )
                             const remainingToys = toys.filter(toy => toy._id !== _id);
