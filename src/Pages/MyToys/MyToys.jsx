@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Componets/Providers/AuthProvider";
 import MyToysRow from "./MyToysRow";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
-import { HiXCircle } from "react-icons/hi";
 import useTitle from "../../Componets/useTitle/useTitle";
 
 
@@ -13,6 +12,8 @@ const MyToys = () => {
 
     useTitle('My Toys')
 
+   
+
     useEffect(() => {
         fetch(`https://toy-marketplace-server-pearl.vercel.app/toysByEmail/${user?.email}`)
             .then(res => res.json())
@@ -22,14 +23,24 @@ const MyToys = () => {
     }, [user])
 
     const handleAscendingByPrice = () => {
-       console.log('okk')
+       const sortToys =  toys.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+       setToys(sortToys)
+       console.log(sortToys)
     }
+
+    const handleDescendingByPrice = () => {
+        const sortDescendingToys = toys.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+        setToys(sortDescendingToys)
+        console.log(sortDescendingToys)
+    }
+
+   
 
 
     return (
         <div className="overflow-x-auto w-full my-12">
             <div className='flex place-content-end relative mb-6'>
-                <button onClick={() => setDropdown(!dropdown)} className='bg-gray-200 font-semibold py-3 px-5 rounded-md flex items-center'>Short by Price{dropdown ? <FaAngleUp title='close menu' className='h-4 w-4 ms-2'></FaAngleUp> : <FaAngleDown title='Open menu' className='h-4 w-4 ms-2'></FaAngleDown>}</button>
+                <button onClick={() => setDropdown(!dropdown)} className='bg-gray-200 font-semibold py-3 px-5 rounded-md flex items-center'>Short Price by {dropdown ? <FaAngleUp title='close menu' className='h-4 w-4 ms-2'></FaAngleUp> : <FaAngleDown title='Open menu' className='h-4 w-4 ms-2'></FaAngleDown>}</button>
                 <div className={`${dropdown ? 'absolute top-8 right-10 ' : 'hidden'}`}>
                     <div className='flex my-4 shadow-xl bg-slate-50  rounded-md p-6'>
                         <button onClick={handleAscendingByPrice} className="relative inline-flex  p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500 hover:text-white dark:text-white ">
@@ -37,7 +48,7 @@ const MyToys = () => {
                                 Ascending 
                             </span>
                         </button>
-                        <button className="relative inline-flex  p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500 hover:text-white dark:text-white ">
+                        <button onClick={handleDescendingByPrice} className="relative inline-flex  p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500 hover:text-white dark:text-white ">
                             <span className="relative px-4 py-2 md:px-5 md:py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                                 Descending 
                             </span>
@@ -51,8 +62,8 @@ const MyToys = () => {
                 <thead>
                     <tr>
                         <th>
-                            <label className="text-3xl cursor-pointer">
-                                <HiXCircle></HiXCircle>
+                            <label className="">
+                                Delete
                             </label>
                         </th>
                         <th>Toy Image</th>

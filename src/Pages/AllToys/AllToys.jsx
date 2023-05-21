@@ -14,7 +14,7 @@ const AllToys = () => {
     useEffect(() => {
         fetch('https://toy-marketplace-server-pearl.vercel.app/toys')
             .then(res => res.json())
-            .then(data => setToys(data.slice(0, 20)));
+            .then(data => setToys(data));
     }, [])
 
     if (loading) {

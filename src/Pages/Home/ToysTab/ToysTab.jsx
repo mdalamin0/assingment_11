@@ -120,6 +120,7 @@ const ToysTab = () => {
                                     <div className="card-body">
                                         <h2 className="card-title"> {toy.name}  </h2>
                                         <p className='text-left'>Price: $ {toy.price}</p>
+                                        <p className='text-left text-semibold text-slate-400'>Rating: {toy.rating}</p>
                                         <div className="card-actions pt-8 justify-between items-center">
                                             <div className=""> <Rating
                                                     style={{ maxWidth: 150 }}
@@ -156,6 +157,7 @@ const ToysTab = () => {
                                     <div className="card-body">
                                         <h2 className="card-title"> {toy.name}  </h2>
                                         <p className='text-left'>Price:$ {toy.price}</p>
+                                        <p className='text-left text-semibold text-slate-400'>Rating: {toy.rating}</p>
                                         <div className="card-actions pt-8 justify-between items-center">
                                             <div className=""> <Rating
                                                     style={{ maxWidth: 150 }}
